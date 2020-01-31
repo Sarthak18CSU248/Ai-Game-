@@ -6,8 +6,8 @@ using UnityEngine;
 public class GridGenerator : MonoBehaviour
 {
 
-    public float rows = 6;
-    public float column = 6;
+    public float rows = 6f;
+    public float column=6f;
     public float tilesize = 1;
 
     public GameObject tile_prefab;
@@ -16,9 +16,9 @@ public class GridGenerator : MonoBehaviour
 
     private GameObject player_move = null;
     private GameObject destination = null;
-    private GameObject gridGo = null;
+    //private GameObject gridGo = null;
 
-    private bool _isGameStarted = false;
+    public bool _isGameStarted;
 
     private void Awake()
     {
@@ -57,6 +57,8 @@ public class GridGenerator : MonoBehaviour
     {
         player_move = Instantiate(player_Prefab) as GameObject;
         player_move.transform.position = transform.GetChild(0).position;
+        var instance = player_move.GetComponent<Player>();
+        instance.Grid = this;
     }
 
     void End_Point()
@@ -68,7 +70,7 @@ public class GridGenerator : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && _isGameStarted==true)
         {
             Vector3 Non_WalkablePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(Non_WalkablePoint, Vector3.forward);
