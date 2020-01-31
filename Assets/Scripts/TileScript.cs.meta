@@ -1,0 +1,29 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TileScript : MonoBehaviour
+{
+    public Sprite Cross_Tile,Original_Tile;
+    public GameObject Tile_prefab;
+    public bool Walkable_point;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    public void Click()
+    {
+        if (Walkable_point==true)
+        {
+            Tile_prefab.GetComponent<SpriteRenderer>().sprite = Cross_Tile;
+       
+        }
+        else
+        {
+            Tile_prefab.GetComponent<SpriteRenderer>().sprite = Original_Tile;
+        }
+
+    }
+}
